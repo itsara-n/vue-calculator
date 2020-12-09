@@ -29,18 +29,20 @@ jobs:
     - name: Install firebase-tools
       run: |
         sudo npm install --unsafeper- -g firebase-tools
-        firebase use 917690507553 --token ${{ secrets.FIREBASE_TOKEN }}
+      #   firebase use ${{ env.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
+      # env:
+      #     PROJECT_ID: '917690507553'
     
-    - name: Install dependencies & Build website
-      run: |
-        npm ci
-        npm run build
+    # - name: Install dependencies & Build website
+    #   run: |
+    #     npm ci
+    #     npm run build
         
-    - name: Deploy to production site
-      if: github.ref == 'refs/heads/main'
-      run: firebase deploy --only hosting --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
+    # - name: Deploy to production site
+    #   if: github.ref == 'refs/heads/main'
+    #   run: firebase deploy --only hosting --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
 
-    - name: Archive build artifact
-      uses: actions/upload-artifact@master
-      with:
-        path: dist
+    # - name: Archive build artifact
+    #   uses: actions/upload-artifact@master
+    #   with:
+    #     path: dist
