@@ -28,7 +28,7 @@ jobs:
 
     - name: Install firebase-tools
       run: |
-        sudo npm install -g firebase-tools
+        sudo npm install --unsafeper- -g firebase-tools
         firebase use 917690507553 --token ${{ secrets.FIREBASE_TOKEN }}
     
     - name: Install dependencies & Build website
