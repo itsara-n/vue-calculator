@@ -26,6 +26,11 @@ jobs:
       with:
         node-version: '12.x'
 
+    - name: Install dependencies & Build website
+      run: |
+        npm ci
+        npm run build
+
     - uses: FirebaseExtended/action-hosting-deploy@v0
       with:
         repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -40,10 +45,6 @@ jobs:
     #     sudo npm install --unsafeper- -g firebase-tools
     #     firebase use 917690507553 --token ${{ secrets.FIREBASE_TOKEN }}
  
-    # - name: Install dependencies & Build website
-    #   run: |
-    #     npm ci
-    #     npm run build
         
     # - name: Deploy to production site
     #   if: github.ref == 'refs/heads/main'
