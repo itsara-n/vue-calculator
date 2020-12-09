@@ -26,31 +26,35 @@ jobs:
       with:
         node-version: '12.x'
 
+    # - name: Install dependencies & Build website
+    #   run: |
+    #     npm ci
+    #     npm run build
+
+    # - uses: FirebaseExtended/action-hosting-deploy@v0
+    #   with:
+    #     repoToken: '${{ secrets.GITHUB_TOKEN }}'
+    #     firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_VUE_CALCULATOR_1EBE1 }}'
+    #     projectId: vue-calculator-1ebe1
+    #   env:
+    #     FIREBASE_CLI_PREVIEWS: hostingchannels
+
+
+    - name: Install firebase-tools
+      run: |
+        sudo npm install --unsafeper- -g firebase-tools
+        firebase use vue-calculator-1ebe1 --token ${{ secrets.FIREBASE_TOKEN }}
+ 
     - name: Install dependencies & Build website
       run: |
         npm ci
         npm run build
 
-    - uses: FirebaseExtended/action-hosting-deploy@v0
+    - name: Deploy to production site
+      if: github.ref == 'refs/heads/main'
+      run: firebase deploy --only hosting --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
+
+    - name: Archive build artifact
+      uses: actions/upload-artifact@master
       with:
-        repoToken: '${{ secrets.GITHUB_TOKEN }}'
-        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_VUE_CALCULATOR_1EBE1 }}'
-        projectId: vue-calculator-1ebe1
-      env:
-        FIREBASE_CLI_PREVIEWS: hostingchannels
-
-
-    # - name: Install firebase-tools
-    #   run: |
-    #     sudo npm install --unsafeper- -g firebase-tools
-    #     firebase use 917690507553 --token ${{ secrets.FIREBASE_TOKEN }}
- 
-        
-    # - name: Deploy to production site
-    #   if: github.ref == 'refs/heads/main'
-    #   run: firebase deploy --only hosting --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
-
-    # - name: Archive build artifact
-    #   uses: actions/upload-artifact@master
-    #   with:
-    #     path: dist
+        path: dist
