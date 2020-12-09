@@ -29,9 +29,9 @@ jobs:
     - name: Install firebase-tools
       run: |
         sudo npm install --unsafeper- -g firebase-tools
-      #   firebase use ${{ env.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
-      # env:
-      #     PROJECT_ID: '917690507553'
+        firebase login:ci --token ${{ secrets.FIREBASE_TOKEN }}
+      env:
+          PROJECT_ID: '917690507553'
     
     # - name: Install dependencies & Build website
     #   run: |
