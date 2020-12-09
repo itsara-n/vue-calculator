@@ -26,12 +26,14 @@ jobs:
       with:
         node-version: '12.x'
 
-    - name: Deploy to Firebase
-      uses: w9jds/firebase-action@master
+    - uses: FirebaseExtended/action-hosting-deploy@v0
       with:
-        args: deploy --only hosting
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_VUE_CALCULATOR_1EBE1 }}'
+        projectId: vue-calculator-1ebe1
       env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_CLI_PREVIEWS: hostingchannels
+
 
     # - name: Install firebase-tools
     #   run: |
