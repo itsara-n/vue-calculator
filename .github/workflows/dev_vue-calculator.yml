@@ -23,7 +23,7 @@ jobs:
     - name: npm install, build, and test
       run: |
         npm install
-        npm run build --if-present
+        npm run build
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
@@ -31,4 +31,4 @@ jobs:
         app-name: 'vue-calculator'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_184916e8194f4abca8e89f6620d34ad5 }}
-        package: ./dist
+        package: dist
