@@ -33,4 +33,4 @@ jobs:
         app-name: 'vue-calculator'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_c71dd8c975504f0f8362dcce55d45249 }}
-        package: vue-calculator/dist/
+        package: ./dist/
