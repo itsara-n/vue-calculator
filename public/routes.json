@@ -1,9 +1,0 @@
-{
-  "routes": [
-    {
-      "route": "/test",
-      "serve": "/index.html",
-      "statusCode": 200
-    }
-  ]
-}
